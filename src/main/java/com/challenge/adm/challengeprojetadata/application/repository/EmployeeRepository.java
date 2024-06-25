@@ -1,7 +1,6 @@
 package com.challenge.adm.challengeprojetadata.application.repository;
 
 import com.challenge.adm.challengeprojetadata.domain.Employee;
-import jakarta.persistence.NamedNativeQueries;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,6 +14,9 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Query("SELECT u FROM Employee  u where u.position = :position")
     List<Employee> findByPosition(@Param("position") String function);
+
+    @Query("SELECT u FROM Employee  u where u.name = :name")
+    Employee findByName(@Param("name") String name);
 
     @Modifying
     @Transactional

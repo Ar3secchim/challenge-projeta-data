@@ -2,6 +2,7 @@ package com.challenge.adm.challengeprojetadata.application.service;
 
 import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRepository;
 import com.challenge.adm.challengeprojetadata.domain.Employee;
+import com.challenge.adm.challengeprojetadata.infra.expection.BadRequestClient;
 import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,26 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository repository;
 
-    public void save(Employee employee) {
+    public void save(Employee employee) throws Exception {
+        if (employee.getName() == null || employee.getName().trim().isEmpty() || employee.getName().trim().length() < 3)
+            throw new Exception("length must be between 3 and 35");
+
+        if (employee.getBirthDate() == null || employee.getBirthDate().isAfter(LocalDate.now()))
+            throw new Exception("date must be after current date");
+
+        if (employee.getSalary() == null || employee.getSalary().compareTo(BigDecimal.ZERO) < 0)
+            throw new Exception("salary must be greater than zero");
+
+        if (employee.getPosition().trim().isEmpty() || employee.getPosition().trim().length() < 3) {
+            throw new Exception("position must not be empty or length must be between 3 and 35 ");
+        }
+
         repository.save(employee);
     }
 
-    public void deleteByName(String name) {
+    public void deleteByName(String name) throws BadRequestClient {
+        Employee Employee = repository.findByName(name);
+        if (Employee == null) throw new BadRequestClient("Employee not found with NAME: " + name);
         repository.deleteByName(name);
     }
 
