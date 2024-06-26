@@ -5,19 +5,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-@Getter
+
 @Setter
+@Getter
 @MappedSuperclass
 public abstract class Person {
-    private String name;
-    private LocalDate birthDate;
+  @Getter
+  private String name;
+  private LocalDate birthDate;
 
-    protected Person() {
-    }
+  protected Person() {
+  }
 
-    public Person(String name, LocalDate birthDate) {
-        this.name = name;
-        this.birthDate = birthDate;
-    }
+  public Person(String name, LocalDate birthDate) {
+    this.name = name;
+    this.birthDate = birthDate;
+  }
 }

@@ -3,7 +3,7 @@ package com.challenge.adm.challengeprojetadata.application.service;
 import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRepository;
 import com.challenge.adm.challengeprojetadata.domain.Employee;
 import com.challenge.adm.challengeprojetadata.infra.expection.BadRequestClient;
-import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
+import com.challenge.adm.challengeprojetadata.utils.FormatterString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +87,6 @@ public class EmployeeService {
                 .map(Employee::getSalary)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return FormatterBigDecimal.forFormatBrazil(totalSalary);
+        return FormatterString.bigDecimalForFormatBrazil(totalSalary);
     }
 }

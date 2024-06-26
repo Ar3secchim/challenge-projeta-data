@@ -3,7 +3,7 @@ package com.challenge.adm.challengeprojetadata.unit.service.employee;
 import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRepository;
 import com.challenge.adm.challengeprojetadata.application.service.EmployeeService;
 import com.challenge.adm.challengeprojetadata.domain.Employee;
-import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
+import com.challenge.adm.challengeprojetadata.utils.FormatterString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,8 +44,8 @@ public class IncreaseSalaryEmployeeUnitTest {
     verify(employeeRepository, times(1)).findAll();
 
     List<Employee> employeeList = employeeService.getAllEmployees();
-    assertEquals("2.210,38", FormatterBigDecimal.forFormatBrazil(employeeList.getFirst().getSalary()));
-    assertEquals("3.585,38", FormatterBigDecimal.forFormatBrazil(employeeList.get(1).getSalary()));
+    assertEquals("2.210,38", FormatterString.bigDecimalForFormatBrazil(employeeList.getFirst().getSalary()));
+    assertEquals("3.585,38", FormatterString.bigDecimalForFormatBrazil(employeeList.get(1).getSalary()));
   }
 
   @Test

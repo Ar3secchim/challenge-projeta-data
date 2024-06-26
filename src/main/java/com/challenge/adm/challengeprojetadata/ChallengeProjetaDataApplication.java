@@ -1,10 +1,9 @@
 package com.challenge.adm.challengeprojetadata;
 
-import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRepository;
 import com.challenge.adm.challengeprojetadata.application.service.EmployeeService;
 import com.challenge.adm.challengeprojetadata.domain.Employee;
 import com.challenge.adm.challengeprojetadata.domain.Person;
-import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
+import com.challenge.adm.challengeprojetadata.utils.PrintTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class ChallengeProjetaDataApplication implements CommandLineRunner {
@@ -46,14 +44,14 @@ public class ChallengeProjetaDataApplication implements CommandLineRunner {
 
         //3.3 - Imprimir todos os funcionários com todas suas informações
         System.out.println("______________3.3- Lista de funcionários_______________");
-        listAllEmployees.forEach(System.out::println);
+        PrintTable.print(listAllEmployees);
         System.out.println();
 
 
         // 3.4 - Os funcionários receberam 10% de aumento de salário, atualizar a lista de funcionários com novo valor
         employeeService.increaseSalary(10);
         System.out.println("______________3.4- Novos salários_______________");
-        employeeService.getAllEmployees().forEach(System.out::println);
+        PrintTable.print(employeeService.getAllEmployees());
         System.out.println();
 
 
@@ -64,14 +62,14 @@ public class ChallengeProjetaDataApplication implements CommandLineRunner {
         System.out.println("______________3.6 -Agrupados por função_______________");
         listEmployees.forEach((function, employeeList) -> {
             System.out.println("\nFunção: " + function);
-            employeeList.forEach(System.out::println);
+            PrintTable.print(employeeList);
         });
         System.out.println();
 
 
         // 3.8 - Imprimir os funcionários que fazem aniversário no mês 10 e 12
         System.out.println("______________3.8 - Aniversáriamtes do mês_______________");
-        employeeService.getBirthDateMoths(10, 12).forEach(System.out::println);
+        PrintTable.print(employeeService.getBirthDateMoths(10, 12));
         System.out.println();
 
 
@@ -87,9 +85,8 @@ public class ChallengeProjetaDataApplication implements CommandLineRunner {
 
         // 3.10 - Imprimir a lista de funcionários por ordem alfabética
         System.out.println("______________3.10- Ordenado por ordem alfabética_______________");
-        employeeService.sortAlphabetically().forEach(System.out::println);
+        PrintTable.print(employeeService.sortAlphabetically());
         System.out.println();
-
 
         // 3.11 - Imprimir o total dos salários dos funcionários
         System.out.println("______________3.11- Total dos salários_______________");

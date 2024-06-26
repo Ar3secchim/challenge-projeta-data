@@ -9,12 +9,14 @@ Solução do desafio técnico da empresa ProjetoData informática.
 
 ## Tecnologias Utilizadas
 
-- 💻 Linguagem de Programação: Java
+- 💻 Linguagem de Programação: Java com Spring boot
 - 📦 Banco de Dados (sistema de gerenciamento): H2 Database (SQL)
+- 📦 Lombok Anotações
 
 ## Funcionalidades em produção
 
 - 💻 Implementação de MVC
+- ✅ Teste unitários
 
 ## Pré-requisitos
 
