@@ -4,6 +4,7 @@ import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRep
 import com.challenge.adm.challengeprojetadata.application.service.EmployeeService;
 import com.challenge.adm.challengeprojetadata.domain.Employee;
 import com.challenge.adm.challengeprojetadata.domain.Person;
+import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -92,7 +93,7 @@ public class ChallengeProjetaDataApplication implements CommandLineRunner {
 
         // 3.11 - Imprimir o total dos salários dos funcionários
         System.out.println("______________3.11- Total dos salários_______________");
-        employeeService.totalAverageSalary();
+        System.out.println("Soma de todos os salários:" + employeeService.totalAverageSalary());
         System.out.println();
 
         System.out.println("______________3.12- Salários mínimos por funcionários_______________");
