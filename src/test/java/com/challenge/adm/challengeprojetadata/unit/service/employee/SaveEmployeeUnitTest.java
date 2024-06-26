@@ -32,10 +32,10 @@ public class SaveEmployeeUnitTest {
     @BeforeEach
     void setUp() {
         employee = new Employee();
-        employee.setName("Maria");
+        employee.setName("Joe Test");
         employee.setBirthDate(LocalDate.of(2000, 10, 18));
         employee.setSalary(new BigDecimal("100.00"));
-        employee.setPosition("Scretaria");
+        employee.setPosition("Position Test");
     }
 
     @Test
