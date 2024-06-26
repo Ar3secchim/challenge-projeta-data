@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
-public class saveEmployee {
+public class SaveEmployeeUnitTest {
     @InjectMocks
     private EmployeeService employeeService;
 
@@ -31,9 +31,12 @@ public class saveEmployee {
 
     @BeforeEach
     void setUp() {
-        employee = new Employee("Maria", LocalDate.of(2000, 10, 18), new BigDecimal("2009.44"), "Operador");
+        employee = new Employee();
+        employee.setName("Maria");
+        employee.setBirthDate(LocalDate.of(2000, 10, 18));
+        employee.setSalary(new BigDecimal("100.00"));
+        employee.setPosition("Scretaria");
     }
-
 
     @Test
     @DisplayName("should register employee when everything success")
@@ -71,7 +74,7 @@ public class saveEmployee {
     }
 
     @Test
-    @DisplayName("should throw exception employee when date birth is invalid")
+    @DisplayName("should throw exception employee when salary is invalid")
     public void registerEmployeeWithSalarySmallerThanZero() {
         employee.setSalary(new BigDecimal(-12500));
         Exception exception = assertThrows(
@@ -94,6 +97,4 @@ public class saveEmployee {
         );
         assertEquals("position must not be empty or length must be between 3 and 35 ", exception.getMessage());
     }
-
-
 }

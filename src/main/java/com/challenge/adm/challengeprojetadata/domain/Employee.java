@@ -25,7 +25,7 @@ public class Employee extends Person {
     private BigDecimal salary;
     private String position;
 
-    protected Employee() {
+    public Employee() {
     }
 
     public Employee(String name, LocalDate birthDate, BigDecimal salary, String position) {
