@@ -48,6 +48,32 @@ public class EmployeeService {
         return repository.findAll();
     }
 
+    public List<Employee> getBirthDateMoths(int... months) {
+        List<Employee> listBirthDateMoths = repository.findAll().stream()
+          .filter(employee -> {
+              int birthMoths = employee.getBirthDate().getMonthValue();
+
+              for (int month : months) {
+                  if (birthMoths == month) return true;
+              }
+              return false;
+          })
+          .collect(Collectors.toList());
+
+        return listBirthDateMoths;
+    }
+
+    public Map<String, List<Employee>> groupingByPosition() {
+        return repository.findAll().stream()
+          .collect(Collectors.groupingBy(Employee::getPosition));
+    }
+
+    public List<Employee> sortAlphabetically() {
+        return repository.findAll().stream()
+          .sorted(Comparator.comparing(Employee::getName))
+          .collect(Collectors.toList());
+    }
+
     public void increaseSalary(int percentage) {
         repository.findAll().forEach(employee -> {
             employee.setSalary(
@@ -58,33 +84,6 @@ public class EmployeeService {
         });
     }
 
-    public Map<String, List<Employee>> groupingByPosition() {
-        return repository.findAll().stream()
-                .collect(Collectors.groupingBy(Employee::getPosition));
-    }
-
-    public List<Employee> getBirthDateMoths(int... months) {
-        List<Employee> listBirthDateMoths = repository.findAll().stream()
-                .filter(employee -> {
-                    int birthMoths = employee.getBirthDate().getMonthValue();
-
-                    for (int month : months) {
-                        if (birthMoths == month) return true;
-                    }
-                    return false;
-
-                })
-                .collect(Collectors.toList());
-
-        return listBirthDateMoths;
-    }
-
-    public List<Employee> sortAlphabetically() {
-        return repository.findAll().stream()
-                .sorted(Comparator.comparing(Employee::getName))
-                .collect(Collectors.toList());
-    }
-
     public void totalAverageSalary() {
         var totalSalary = repository.findAll().stream()
                 .map(Employee::getSalary)
@@ -92,6 +91,4 @@ public class EmployeeService {
 
         System.out.println("Soma de todos os salários:" + FormatterBigDecimal.forFormatBrazil(totalSalary));
     }
-
-
 }
