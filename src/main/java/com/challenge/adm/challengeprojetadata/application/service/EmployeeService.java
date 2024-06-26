@@ -4,13 +4,11 @@ import com.challenge.adm.challengeprojetadata.application.repository.EmployeeRep
 import com.challenge.adm.challengeprojetadata.domain.Employee;
 import com.challenge.adm.challengeprojetadata.infra.expection.BadRequestClient;
 import com.challenge.adm.challengeprojetadata.utils.FormatterBigDecimal;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -84,11 +82,11 @@ public class EmployeeService {
         });
     }
 
-    public void totalAverageSalary() {
+    public String totalAverageSalary() {
         var totalSalary = repository.findAll().stream()
                 .map(Employee::getSalary)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        System.out.println("Soma de todos os salários:" + FormatterBigDecimal.forFormatBrazil(totalSalary));
+        return FormatterBigDecimal.forFormatBrazil(totalSalary);
     }
 }
